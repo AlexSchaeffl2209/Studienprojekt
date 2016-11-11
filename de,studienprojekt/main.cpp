@@ -91,36 +91,51 @@ int readFile()
         while (fscanf(fp, "%s", buffer) != EOF)
         {
             fscanf(fp, "%f", buffer);
+            int countOfNumbers = 0;
 
-            while (buffer[i] != '\0' || buffer[i] !=
-                                        '.')   //Geht das Array durch bis er entweder am Ende der Zahl ist oder bei einer DoubleZahl einen '.' findet
+            while (buffer[i] != '\0' || buffer[i] != '.')   //Geht das Array durch bis er entweder am Ende der Zahl ist oder bei einer DoubleZahl einen '.' findet
             {
                 int j = i;
                 int z = i;
 
+                //Wenn eine Double Zahl gefunden wird
                 if (buffer[i] == '.')
                 {
                     unsigned long long x = 1;
                     while (j > 0)
                     {
-                        safe[0] = safe[0] + ((buffer[j - 1] - '0' ) * (1 * x));  //Addiert die 1_er der Zahl + 10er_Stelle usw. in das Double_Array
+                        safe[countOfNumbers] = safe[countOfNumbers] + ((buffer[j - 1] - '0') * (1 * x));  //Addiert die 1_er der Zahl + 10er_Stelle usw. in das Double_Array
                         j--;
-                        x =  x * 10;
+                        x = x * 10;
                     }
 
                     unsigned long long a = 10;
                     while (z != '\000')
                     {
-                        safe[0] = safe[0] + ((buffer[z + 1] - '0') * (1 / a));     //Addiert bei Double_Zahl die Stellen nach dem '.' hinzu
+                        safe[countOfNumbers] = safe[countOfNumbers] + ((buffer[z + 1] - '0') * (1 / a));     //Addiert bei Double_Zahl die Stellen nach dem '.' hinzu
                         z++;
                         a = a * 10;
                     }
                 }
+
+                //Wenn eine Int Zahl gefunden wird
+                if (buffer[i] == '\000')
+                {
+                    unsigned long long x = 1;
+                    while (j > 0)
+                    {
+                        safe[countOfNumbers] = safe[countOfNumbers] + ((buffer[j - 1] - '0') * (1 * x));  //Addiert die 1_er der Zahl + 10er_Stelle usw. in das Double_Array
+                        j--;
+                        x = x * 10;
+                    }
+                }
                 i++;
             }
+            printf("%f", safe[countOfNumbers]);
+            countOfNumbers++;
+
         }
 
-        printf("%f", safe[0]);
 
         //printf("%s\n\n", tmp);
 
