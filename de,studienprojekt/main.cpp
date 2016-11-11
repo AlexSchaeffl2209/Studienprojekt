@@ -72,14 +72,15 @@ int readFile()
     FILE *fp;
     fp = fopen(FILEPATH, "r");
 
-    int size = 255;
+
+    int size = 50;
     char buffer[size];
     double safe[size];
 
-//    for (int j = 0; j < size; j++)
-//    {
-//        buffer[j] = ' ';
-//    }
+    for(int v = 0; v <= size; v++)
+    {
+        buffer[v] = '\0';
+    }
 
     if (fp == NULL)
     {
@@ -88,10 +89,11 @@ int readFile()
     else
     {
         int i = 0;
+        int countOfNumbers = 0;
+
         while (fscanf(fp, "%s", buffer) != EOF)
         {
             fscanf(fp, "%f", buffer);
-            int countOfNumbers = 0;
 
             while (buffer[i] != '\0' || buffer[i] != '.')   //Geht das Array durch bis er entweder am Ende der Zahl ist oder bei einer DoubleZahl einen '.' findet
             {
@@ -110,42 +112,31 @@ int readFile()
                     }
 
                     unsigned long long a = 10;
-                    while (z != '\000')
+                    while (z != '\0')
                     {
-                        safe[countOfNumbers] = safe[countOfNumbers] + ((buffer[z + 1] - '0') * (1 / a));     //Addiert bei Double_Zahl die Stellen nach dem '.' hinzu
+                        safe[countOfNumbers] = safe[countOfNumbers] + ((buffer[z + 1] - '0')) * (1 / a);     //Addiert bei Double_Zahl die Stellen nach dem '.' hinzu
                         z++;
                         a = a * 10;
                     }
                 }
 
                 //Wenn eine Int Zahl gefunden wird
-                if (buffer[i] == '\000')
+                if (buffer[i] == '\0')
                 {
                     unsigned long long x = 1;
                     while (j > 0)
                     {
-                        safe[countOfNumbers] = safe[countOfNumbers] + ((buffer[j - 1] - '0') * (1 * x));  //Addiert die 1_er der Zahl + 10er_Stelle usw. in das Double_Array
+                        safe[countOfNumbers] = safe[countOfNumbers] + ((buffer[j - 1] * (1 * x)) - '0');  //Addiert die 1_er der Zahl + 10er_Stelle usw. in das Double_Array
                         j--;
                         x = x * 10;
                     }
                 }
                 i++;
-
-
             }
             printf("%f", safe[countOfNumbers]);
             countOfNumbers++;
 
         }
-
-
-        //printf("%s\n\n", tmp);
-
-        //getFieldType(tmp);
-        //getGeometryType(tmp);
-        //getLoadResults(tmp);
-        //getExternField(tmp);
-
     }
     return 0;
 }
