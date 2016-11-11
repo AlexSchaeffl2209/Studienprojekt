@@ -130,6 +130,8 @@ int readFile()
                     }
                 }
                 i++;
+
+
             }
             printf("%f", safe[countOfNumbers]);
             countOfNumbers++;
