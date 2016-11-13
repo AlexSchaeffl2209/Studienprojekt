@@ -82,12 +82,13 @@ int readFile()
     else
     {
         int i = 0;
-        int countOfNumbers = 1;
+        int countOfNumbers = 0;
 
         while (fscanf(fp, "%s", buffer) != EOF)
         {
             while (buffer[i] != '\0')   //Geht das Array durch bis er entweder am Ende der Zahl ist
             {
+                safe[countOfNumbers] = 0.0;
                 int j = i;
                 int z = i;
 
@@ -97,8 +98,7 @@ int readFile()
                     unsigned long long x = 1;
                     while (j > 0)
                     {
-                        safe[countOfNumbers] =
-                                safe[countOfNumbers] + ((buffer[j - 1] - '0') * (1 * x));  //Addiert die 1_er der Zahl + 10er_Stelle usw. in das Double_Array
+                        safe[countOfNumbers] = safe[countOfNumbers] + ((buffer[j - 1] - '0') * (1 * x));  //Addiert die 1_er der Zahl + 10er_Stelle usw. in das Double_Array
                         j--;
                         x = x * 10;
                     }
@@ -113,23 +113,24 @@ int readFile()
                         z++;
                         a = a * 10;
                     }
+                    break;
                 }
 
                     //Wenn eine Int Zahl gefunden wird
-                else if (buffer[i] == '\0')
+                else if (buffer[i + 1] == '\0')
                 {
                     unsigned long long x = 1;
-                    while (j > 0)
+                    while (j >= 0)
                     {
-                        safe[countOfNumbers] =
-                                safe[countOfNumbers] + ((buffer[j - 1] * (1 * x)) - '0');  //Addiert die 1_er der Zahl + 10er_Stelle usw. in das Double_Array
+                        safe[countOfNumbers] = safe[countOfNumbers] + ((buffer[j] * (1 * x)) - '0');  //Addiert die 1_er der Zahl + 10er_Stelle usw. in das Double_Array
                         j--;
                         x = x * 10;
                     }
                 }
                 i++;
             }
-            printf("%f", safe[countOfNumbers]);
+            i = 0;
+            printf("%f\n", safe[countOfNumbers]);
             countOfNumbers++;
 
         }
