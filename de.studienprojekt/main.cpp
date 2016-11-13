@@ -1,6 +1,4 @@
 #include <iostream>
-#include <stdio.h>
-#include <string.h>
 
 #define FILEPATH "C:\\Users\\Alex-Pc\\Desktop\\lesen.txt"
 
@@ -77,11 +75,6 @@ int readFile()
     char buffer[size];
     double safe[size];
 
-    for(int v = 0; v <= size; v++)
-    {
-        buffer[v] = '\0';
-    }
-
     if (fp == NULL)
     {
         printf("Datei konnte nicht geoeffnet werden!\n");
@@ -89,13 +82,11 @@ int readFile()
     else
     {
         int i = 0;
-        int countOfNumbers = 0;
+        int countOfNumbers = 1;
 
         while (fscanf(fp, "%s", buffer) != EOF)
         {
-            fscanf(fp, "%f", buffer);
-
-            while (buffer[i] != '\0' || buffer[i] != '.')   //Geht das Array durch bis er entweder am Ende der Zahl ist oder bei einer DoubleZahl einen '.' findet
+            while (buffer[i] != '\0')   //Geht das Array durch bis er entweder am Ende der Zahl ist oder bei einer DoubleZahl einen '.' findet
             {
                 int j = i;
                 int z = i;
@@ -112,16 +103,19 @@ int readFile()
                     }
 
                     unsigned long long a = 10;
-                    while (z != '\0')
+                    while (buffer[z + 1] != '\0')
                     {
-                        safe[countOfNumbers] = safe[countOfNumbers] + ((buffer[z + 1] - '0')) * (1 / a);     //Addiert bei Double_Zahl die Stellen nach dem '.' hinzu
+                        double test = (buffer[z + 1] - '0');
+                        double tmp = test * (1.0 / a);
+
+                        safe[countOfNumbers] = safe[countOfNumbers] + tmp;     //Addiert bei Double_Zahl die Stellen nach dem '.' hinzu
                         z++;
                         a = a * 10;
                     }
                 }
 
                 //Wenn eine Int Zahl gefunden wird
-                if (buffer[i] == '\0')
+                else if (buffer[i] == '\0')
                 {
                     unsigned long long x = 1;
                     while (j > 0)
