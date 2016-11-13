@@ -4,67 +4,6 @@
 
 using namespace std;
 
-//Bestimmt die Feldart des Xtwin-Programms
-int getFieldType(char charArray[])
-{
-    if ((charArray[0]) == '0')
-    {
-        return printf("Feldart: %c Kapaz. & Real\n", charArray[0]);
-
-    }
-    else if (charArray[0] == '1')
-    {
-        return printf("Feldart: %c Kapaz. & komplex\n", charArray[0]);
-
-    }
-    else if (charArray[0] == '2')
-    {
-        return printf("Feldart: %c Kapaz. Res & komplex\n", charArray[0]);
-
-    }
-    return 0;
-}
-
-//Bestimmt die Geometry des Xtwin-Programms
-int getGeometryType(char charArray[])
-{
-    if ((charArray[2]) == '0')
-    {
-        return printf("Geometrie: %c 2D\n", charArray[2]);
-
-    }
-    else if (charArray[2] == '1')
-    {
-        return printf("Geometrie: %c Achsensymmetrisch\n", charArray[2]);
-
-    }
-    return 0;
-}
-
-//Bestimmt ob die Ergebnisse geladen werden sollen oder nicht
-int getLoadResults(char charArray[])
-{
-    int charPosition = 4;
-    if ((charArray[charPosition]) == '0')
-    {
-        return printf("Ergebnisse laden: %c\n", charArray[charPosition]);
-
-    }
-    else if (charArray[charPosition] == '1')
-    {
-        return printf("Ergebnisse laden: %c\n", charArray[charPosition]);
-    }
-    return 0;
-}
-
-/*
-int getExternField(char charArray[])
-{
-
-}
-*/
-
-
 int readFile()
 {
     FILE *fp;
@@ -132,10 +71,8 @@ int readFile()
             i = 0;
             printf("%f\n", safe[countOfNumbers]);
             countOfNumbers++;
-
         }
     }
-    return 0;
 }
 
 int main()
