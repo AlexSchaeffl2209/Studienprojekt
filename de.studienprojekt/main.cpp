@@ -86,7 +86,7 @@ int readFile()
 
         while (fscanf(fp, "%s", buffer) != EOF)
         {
-            while (buffer[i] != '\0')   //Geht das Array durch bis er entweder am Ende der Zahl ist oder bei einer DoubleZahl einen '.' findet
+            while (buffer[i] != '\0')   //Geht das Array durch bis er entweder am Ende der Zahl ist
             {
                 int j = i;
                 int z = i;
@@ -97,7 +97,8 @@ int readFile()
                     unsigned long long x = 1;
                     while (j > 0)
                     {
-                        safe[countOfNumbers] = safe[countOfNumbers] + ((buffer[j - 1] - '0') * (1 * x));  //Addiert die 1_er der Zahl + 10er_Stelle usw. in das Double_Array
+                        safe[countOfNumbers] =
+                                safe[countOfNumbers] + ((buffer[j - 1] - '0') * (1 * x));  //Addiert die 1_er der Zahl + 10er_Stelle usw. in das Double_Array
                         j--;
                         x = x * 10;
                     }
@@ -108,19 +109,20 @@ int readFile()
                         double test = (buffer[z + 1] - '0');
                         double tmp = test * (1.0 / a);
 
-                        safe[countOfNumbers] = safe[countOfNumbers] + tmp;     //Addiert bei Double_Zahl die Stellen nach dem '.' hinzu
+                        safe[countOfNumbers] = safe[countOfNumbers] + tmp;     //Addiert bei Double_Zahlen die Stellen nach dem '.' hinzu
                         z++;
                         a = a * 10;
                     }
                 }
 
-                //Wenn eine Int Zahl gefunden wird
+                    //Wenn eine Int Zahl gefunden wird
                 else if (buffer[i] == '\0')
                 {
                     unsigned long long x = 1;
                     while (j > 0)
                     {
-                        safe[countOfNumbers] = safe[countOfNumbers] + ((buffer[j - 1] * (1 * x)) - '0');  //Addiert die 1_er der Zahl + 10er_Stelle usw. in das Double_Array
+                        safe[countOfNumbers] =
+                                safe[countOfNumbers] + ((buffer[j - 1] * (1 * x)) - '0');  //Addiert die 1_er der Zahl + 10er_Stelle usw. in das Double_Array
                         j--;
                         x = x * 10;
                     }
