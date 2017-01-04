@@ -5,7 +5,7 @@
 
 using namespace std;
 
-double * readFile()
+void readFile()
 {
     FILE *fp;
     fp = fopen(FILEPATHR, "r");
@@ -73,14 +73,11 @@ double * readFile()
             countOfNumbers++;
         }
     }
-    return safe;
-}
 
+    //writeFile
 
-void writeFile(double safe[])
-{
-    FILE *fp;
-    fp = fopen(FILEPATHW, "w");
+    FILE *fp2;
+    fp2 = fopen(FILEPATHW, "w");
 
     //Feldart
     if (safe[0] == 0)
@@ -103,34 +100,30 @@ void writeFile(double safe[])
     }
 
     //Boundary
-    for (int i = 0; i < safe[6]; i++)
+    for (int i = 0; i <= ((int) safe[6]); i++)
     {
         //BoundaryTyp
         int boundaryTyp = 7;
-        if(safe[boundaryTyp] == 1)
+        switch ((int) safe[boundaryTyp])
         {
-            fprintf(fp, "%s", "gl.bc 0");
-        }
-        if(safe[boundaryTyp] == 2)
-        {
-            fprintf(fp, "%s", "gl.di");
-        }
-        if(safe[boundaryTyp] == 3)
-        {
-            fprintf(fp, "%s", "gl.bc 1");
+            case 1 :
+                fprintf(fp2, "%s %d %d \n", "gl.bc", i, 1);
+                break;
+            case 2:
+                fprintf(fp2, "%s %d \n", "gl.di", 1);
+                break;
+            case 3:
+                fprintf(fp2, "%s %d %d \n", "gl.bc", i, 3);
+                break;
         }
     }
 }
 
-int main()
-{
 
-    double *tmp;
+    int main()
+    {
+        readFile();
 
-    tmp = readFile();
-
-    writeFile(tmp);
-
-    return 0;
-}
+        return 0;
+    }
 
