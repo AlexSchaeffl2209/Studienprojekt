@@ -1,16 +1,17 @@
 #include <iostream>
 
-#define FILEPATH "C:\\Users\\Alex-Pc\\Desktop\\lesen.txt"
+#define FILEPATHR "C:\\Users\\Alex-Pc\\Desktop\\lesen.txt"
+#define FILEPATHW "C:\\Users\\Alex-Pc\\Desktop\\schreiben.txt"
 
 using namespace std;
 
-int readFile()
+double * readFile()
 {
     FILE *fp;
-    fp = fopen(FILEPATH, "r");
+    fp = fopen(FILEPATHR, "r");
 
 
-    int size = 50;
+    int size = 200;
     char buffer[size];
     double safe[size];
 
@@ -54,7 +55,6 @@ int readFile()
                     }
                     break;
                 }
-
                     //Wenn eine Int Zahl gefunden wird
                 else if (buffer[i + 1] == '\0')
                 {
@@ -69,14 +69,68 @@ int readFile()
                 i++;
             }
             i = 0;
-            printf("%f\n", safe[countOfNumbers]);
+            printf("%.2f\n", safe[countOfNumbers]);
             countOfNumbers++;
+        }
+    }
+    return safe;
+}
+
+
+void writeFile(double safe[])
+{
+    FILE *fp;
+    fp = fopen(FILEPATHW, "w");
+
+    //Feldart
+    if (safe[0] == 0)
+    {
+        //fprintf(fp, "%s %s %s %d", "We", "are", "in", 2012);
+    }
+    if (safe[0] == 1)
+    {
+    }
+    if (safe[0] == 2)
+    {
+    }
+
+    //Geometrie
+    if (safe[0] == 0)
+    {
+    }
+    if (safe[0] == 1)
+    {
+    }
+
+    //Boundary
+    for (int i = 0; i < safe[6]; i++)
+    {
+        //BoundaryTyp
+        int boundaryTyp = 7;
+        if(safe[boundaryTyp] == 1)
+        {
+            fprintf(fp, "%s", "gl.bc 0");
+        }
+        if(safe[boundaryTyp] == 2)
+        {
+            fprintf(fp, "%s", "gl.di");
+        }
+        if(safe[boundaryTyp] == 3)
+        {
+            fprintf(fp, "%s", "gl.bc 1");
         }
     }
 }
 
 int main()
 {
-    readFile();
+
+    double *tmp;
+
+    tmp = readFile();
+
+    writeFile(tmp);
+
+    return 0;
 }
 
